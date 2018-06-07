@@ -1,5 +1,7 @@
 package com.lanxiong.search.controller;
 
+import com.lanxiong.search.po.ShowAudience;
+import com.lanxiong.search.service.ShowAudienceSolrService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
@@ -24,37 +26,21 @@ public class SolrController {
     private SolrClient solrClient;
     @Autowired
     private SolrClient showSolrClient;
+    @Autowired
+    private ShowAudienceSolrService showAudienceSolrService;
 
-    @RequestMapping("index")
-    public String index() {
-        return "hello solr";
-    }
 
     @RequestMapping("addShowData")
-    public String addShowData() {
-        String test = "";
+    public String addShowData(ShowAudience show) {
+
         try {
-            SolrInputDocument document = new SolrInputDocument();
-            document.addField("show_id", 11);
-            document.addField("show_title", "多core测试");
-            document.addField("show_url", 11);
-            document.addField("show_replayurl", 11);
-            document.addField("show_remark", 11);
-            document.addField("show_userid", 11);
-            showSolrClient.add(document);
-            log.info(document.toString());
+            showAudienceSolrService.addShowAudienceData(show);
         } catch (Exception e) {
-            log.error(e.getMessage(),e);
-        }
-        try {
-            showSolrClient.commit();
-        } catch (SolrServerException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            log.info(e.getMessage(),e);
+            return "添加失败";
         }
 
-        return test;
+        return "添加成功";
     }
 
     @RequestMapping("queryData")
