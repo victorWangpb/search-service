@@ -1,5 +1,6 @@
 package com.lanxiong.search.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/solr/")
 public class SolrController {
@@ -40,8 +42,9 @@ public class SolrController {
             document.addField("show_remark", 11);
             document.addField("show_userid", 11);
             showSolrClient.add(document);
+            log.info(document.toString());
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage(),e);
         }
         try {
             showSolrClient.commit();
@@ -80,11 +83,14 @@ public class SolrController {
         List<SolrDocument> list = new ArrayList<SolrDocument>();
         try {
             SolrQuery query = new SolrQuery();
-            query.setQuery("show_title:core");
+            query.setQuery("show_title:北京");
             query.setStart(1);
             query.setRows(10);
             QueryResponse queryResponse = solrClient.query(query);
             list = queryResponse.getResults();
+            for (SolrDocument document:list){
+                log.info(document.toString());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

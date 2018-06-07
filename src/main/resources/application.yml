@@ -1,0 +1,9 @@
+server:
+  port: 8088
+
+spring:
+  profiles:
+    active: test
+  data:
+    solr:
+      host: http://47.94.20.173:9090/solr/
