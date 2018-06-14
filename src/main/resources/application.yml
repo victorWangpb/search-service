@@ -7,3 +7,12 @@ spring:
   data:
     solr:
       host: http://47.94.20.173:9090/solr/
+    elasticsearch:
+      cluster-nodes: 47.94.20.173:9300
+
+  # elasticsearch:
+    #jest:
+     # uris:
+      #  http://47.94.20.173:9200
+      #read-timeout: 5000
+#spring.data.elasticsearch.cluster-nodes = 127.0.0.1:9300
