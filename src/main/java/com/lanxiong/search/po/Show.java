@@ -6,6 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 //import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @Document(indexName = "showindex",type = "show")
@@ -18,5 +19,6 @@ public class Show implements Serializable {
     private String url;  //直播图片地址
     private String replayUrl; //回放地址
     private String remark; //备注
+    private Date date;
 
 }

@@ -14,6 +14,7 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service("showService")
@@ -25,13 +26,14 @@ public class ShowServiceImpl implements ShowService {
     private Integer PAGESIZE=10;
 
     @Override
-    public void add() {
-        Show show=new Show();
-        show.setShowid(111L);
-        show.setUserid(222L);
-        show.setRemark("es 添加测试");
-        show.setUrl("http://baidu.com");
+    public void add(Show show) {
+        show.setDate(new Date());
         showEsService.save(show);
+    }
+
+    @Override
+    public void delete(Long showid) {
+        showEsService.delete(showid);
     }
 
     @Override
