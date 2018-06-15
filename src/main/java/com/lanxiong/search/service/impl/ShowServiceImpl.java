@@ -47,9 +47,7 @@ public class ShowServiceImpl implements ShowService {
 
     private SearchQuery getEntitySearchQuery(int pageNumber, int pageSize, String searchContent) {
         FunctionScoreQueryBuilder functionScoreQueryBuilder = QueryBuilders.functionScoreQuery()
-                .add(QueryBuilders.matchPhraseQuery("name", searchContent),
-                        ScoreFunctionBuilders.weightFactorFunction(100))
-                .add(QueryBuilders.matchPhraseQuery("description", searchContent),
+                .add(QueryBuilders.matchPhraseQuery("title", searchContent),
                         ScoreFunctionBuilders.weightFactorFunction(100))
                 //设置权重分 求和模式
                 .scoreMode("sum")
